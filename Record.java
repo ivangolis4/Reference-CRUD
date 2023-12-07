@@ -1,3 +1,5 @@
+
+
 public class Record {
     int id, qty;
     String ProductName;
@@ -5,6 +7,7 @@ public class Record {
     public Record(){
 
     }
+
 
     public Record(int id, int qty, String ProductName){
         this.id = id;
@@ -35,10 +38,7 @@ public class Record {
         ProductName = productName;
     }
 
-    public String toString()
-    {
-        return "Records{"+"PID: "+id +" Product Name: "+ProductName+" Quantity: "+qty+ '}';
-    }
+    
 }
 
     
@@ -46,5 +46,4 @@ public class Record {
 
     
     
-
 

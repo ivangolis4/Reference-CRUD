@@ -4,12 +4,12 @@ import java.awt.*;
 import java.awt.event.*;
 
 
-public class UpdateProductFrame extends ProductOperationFrame {
+public class RetrieveProductFrame extends ProductOperationFrame {
     // private JTextField idField;
     private CRUD hr;
     private DefaultTableModel tableModel;
 
-    public UpdateProductFrame(CRUD hr, DefaultTableModel tableModel) {
+    public RetrieveProductFrame(CRUD hr, DefaultTableModel tableModel) {
         this.hr = hr;
         this.tableModel = tableModel;
         initialize();
@@ -17,7 +17,7 @@ public class UpdateProductFrame extends ProductOperationFrame {
 
     @Override
     protected void initialize() {
-        setTitle("Update Product");
+        setTitle("Search Product");
         setSize(300, 100);
 
         JPanel panel = new JPanel(new GridLayout(2, 2));
@@ -52,13 +52,7 @@ public class UpdateProductFrame extends ProductOperationFrame {
                 Record record = hr.findRecord(id);
 
                 if (record != null) {
-                    String NameInput = JOptionPane.showInputDialog("Enter Product Name:");
-                    String QtyInput = JOptionPane.showInputDialog("Enter Product Quantity:");
-                    int qt = Integer.parseInt(QtyInput);
-                    record.setProductName(NameInput);
-                    record.setQty(qt);
-                    
-                    JOptionPane.showMessageDialog(this, "Update Successfully", "New Record", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "PID: "+record.getId()+"\nProduct Name: "+record.getProductName()+"\nQuantity: "+record.getQty(), "Record", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(null, "Product ID does not exist", "Not Found", JOptionPane.WARNING_MESSAGE);
                 }

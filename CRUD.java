@@ -1,15 +1,27 @@
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+
+
 
 public class CRUD {
     private LinkedList<Record> list;
 
     public CRUD() {
         list = new LinkedList<>();
+    }
+
+    public Record findRecord(int idNumber) {
+        for (Record l : list) {
+            if (l.getId() == idNumber) {
+                return l;
+            }
+        }
+        return null;
     }
 
     public void add(Record record) {
@@ -48,15 +60,7 @@ public class CRUD {
         }
     }
 
-    public Record findRecord(int idNumber) {
-        for (Record l : list) {
-            if (l.getId() == idNumber) {
-                return l;
-            }
-        }
-
-        return null;
-    }
+      
 
     public void update(int id, Record updatedRecord) {
         if (find(id)) {
@@ -83,27 +87,30 @@ public class CRUD {
     public List<Record> getList() {
         return list;
     }
+
+    
 }
 
 class UpdateProductFrame extends JFrame {
     private CRUD hr;
     private MainGUI mainGUI;
     private JTextField idField, nameField, qtyField;
-
-    public UpdateProductFrame(CRUD hr, MainGUI mainGUI) {
+    private DefaultTableModel tableModel;
+    private LinkedList<Record> lists;
+    public UpdateProductFrame(CRUD hr, DefaultTableModel tableModel) {
         this.hr = hr;
-        this.mainGUI = mainGUI;
+        this.tableModel = tableModel;
+        
 
         setTitle("Update Product");
         setSize(300, 200);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(4, 2));
+        String idInput = JOptionPane.showInputDialog("Enter Product ID:");
+        int id = Integer.parseInt(idInput);
 
-        JLabel idLabel = new JLabel("Product ID:");
-        idField = new JTextField();
+        
         JLabel nameLabel = new JLabel("Product Name:");
         nameField = new JTextField();
         JLabel qtyLabel = new JLabel("Quantity:");
@@ -116,18 +123,11 @@ class UpdateProductFrame extends JFrame {
                 updateProduct();
             }
         });
-
-        panel.add(idLabel);
-        panel.add(idField);
-        panel.add(nameLabel);
-        panel.add(nameField);
-        panel.add(qtyLabel);
-        panel.add(qtyField);
-        panel.add(updateButton);
-
-        add(panel);
-        setVisible(true);
+       
+        
     }
+
+    
 
     private void updateProduct() {
         try {
@@ -146,9 +146,3 @@ class UpdateProductFrame extends JFrame {
         }
     }
 }
-
-
-
-
-    
- 

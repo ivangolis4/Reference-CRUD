@@ -19,4 +19,3 @@ public abstract class ProductOperationFrame extends JFrame {
 
     protected abstract void onFrameClosed();
 }
-
